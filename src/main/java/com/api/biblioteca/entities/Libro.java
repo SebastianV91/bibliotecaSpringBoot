@@ -1,5 +1,7 @@
 package com.api.biblioteca.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -21,9 +23,12 @@ public class Libro {
 
     @Column(name = "descripcion")
     private String descripcion;
-
+    
     @Column(name = "fecha_publicacion")
     private Date fechaPublicacion;
+
+    public Libro() {
+    }
 
     public Libro(int idAutor, String nombre, String descripcion, Date fechaPublicacion) {
         this.idAutor = idAutor;

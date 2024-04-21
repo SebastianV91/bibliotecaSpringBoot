@@ -6,6 +6,8 @@ import com.api.biblioteca.service.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LibroServiceImpl implements LibroService {
 
@@ -17,6 +19,10 @@ public class LibroServiceImpl implements LibroService {
         libroRepository.save(libro);
     }
 
+    @Override
+    public List<Libro> list() {
+        return libroRepository.findAll();
+    }
 
 
 }

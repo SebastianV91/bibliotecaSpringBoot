@@ -1,5 +1,7 @@
 package com.api.biblioteca.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class LibroDTO {
@@ -8,6 +10,16 @@ public class LibroDTO {
     private String nombre;
     private String descripcion;
     private Date fechaPublicacion;
+
+    public LibroDTO() {
+    }
+
+    public LibroDTO(int idAutor, String nombre, String descripcion, Date fechaPublicacion) {
+        this.idAutor = idAutor;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaPublicacion = fechaPublicacion;
+    }
 
     public int getIdAutor() {
         return idAutor;
