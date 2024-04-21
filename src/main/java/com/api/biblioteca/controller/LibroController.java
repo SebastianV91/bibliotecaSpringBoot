@@ -12,29 +12,41 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/libro")
+@RequestMapping("/biblioteca")
 public class LibroController {
 
     @Autowired
     LibroService libroService;
 
-    @PostMapping("/createLibro")
+    @PostMapping("/libros")
     public ResponseEntity<?> createLibro(@RequestBody LibroDTO libroDTO){
         Libro libro = new Libro(libroDTO.getIdAutor(), libroDTO.getNombre(), libroDTO.getDescripcion(), libroDTO.getFechaPublicacion());
         libroService.save(libro);
         return new ResponseEntity(new Mensaje("Libro creado"), HttpStatus.OK);
     }
 
-    @GetMapping("/listLibros")
+    @GetMapping("/libros")
     public ResponseEntity<List<Libro>> listLibros(){
         List<Libro> list = libroService.list();
         return new ResponseEntity(list, HttpStatus.OK);
     }
 
-    @GetMapping("/findLibro/{id}")
+    @GetMapping("/libros/{id}")
     public ResponseEntity<Libro> getById(@PathVariable("id") Integer id){
         Libro libro = libroService.getOne(id).get();
         return new ResponseEntity(libro, HttpStatus.OK);
+    }
+
+    @PutMapping("/libros/{id}")
+    public ResponseEntity<?> updateLibro(@PathVariable("id") int id, @RequestBody LibroDTO libroDTO){
+
+        Libro libro = libroService.getOne(id).get();
+        libro.setIdAutor(libroDTO.getIdAutor());
+        libro.setNombre(libroDTO.getNombre());
+        libro.setDescripcion(libroDTO.getDescripcion());
+        libro.setFechaPublicacion(libroDTO.getFechaPublicacion());
+        libroService.save(libro);
+        return new ResponseEntity(new Mensaje("Libro actualizado"), HttpStatus.OK);
     }
 
 }

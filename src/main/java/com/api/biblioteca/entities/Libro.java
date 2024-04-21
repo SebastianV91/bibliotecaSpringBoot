@@ -1,7 +1,5 @@
 package com.api.biblioteca.entities;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -45,8 +43,8 @@ public class Libro {
         this.id = id;
     }
 
-    public int getIdAutor() {
-        return idAutor;
+    public int getIdAutor(int idAutor) {
+        return this.idAutor;
     }
 
     public void setIdAutor(int idAutor) {
