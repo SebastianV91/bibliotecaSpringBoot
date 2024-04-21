@@ -35,5 +35,15 @@ public class LibroServiceImpl implements LibroService {
         libroRepository.deleteById(id);
     }
 
+    @Override
+    public boolean existsById(Integer id) {
+        return libroRepository.existsById(id);
+    }
+
+    @Override
+    public boolean existsByNombre(String nombre) {
+        return libroRepository.existsByNombre(nombre);
+    }
+
 
 }

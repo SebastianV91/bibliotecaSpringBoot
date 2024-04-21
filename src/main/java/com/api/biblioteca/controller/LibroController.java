@@ -20,6 +20,10 @@ public class LibroController {
 
     @PostMapping("/libros")
     public ResponseEntity<?> createLibro(@RequestBody LibroDTO libroDTO){
+
+        if(libroService.existsByNombre(libroDTO.getNombre()))
+            return new ResponseEntity(new Mensaje("Ese libro ya existe"), HttpStatus.BAD_REQUEST);
+
         Libro libro = new Libro(libroDTO.getIdAutor(), libroDTO.getNombre(), libroDTO.getDescripcion(), libroDTO.getFechaPublicacion());
         libroService.save(libro);
         return new ResponseEntity(new Mensaje("Libro creado"), HttpStatus.OK);
@@ -33,12 +37,21 @@ public class LibroController {
 
     @GetMapping("/libros/{id}")
     public ResponseEntity<Libro> getById(@PathVariable("id") Integer id){
+
+        if(!libroService.existsById(id))
+            return new ResponseEntity(new Mensaje("No existe"), HttpStatus.NOT_FOUND);
+
         Libro libro = libroService.getOne(id).get();
         return new ResponseEntity(libro, HttpStatus.OK);
     }
 
     @PutMapping("/libros/{id}")
     public ResponseEntity<?> updateLibro(@PathVariable("id") int id, @RequestBody LibroDTO libroDTO){
+
+        if(!libroService.existsById(id))
+            return new ResponseEntity(new Mensaje("No existe el id registrado"), HttpStatus.NOT_FOUND);
+        if(libroService.existsByNombre(libroDTO.getNombre()))
+            return new ResponseEntity(new Mensaje("Ese libro ya existe"), HttpStatus.BAD_REQUEST);
 
         Libro libro = libroService.getOne(id).get();
         libro.setIdAutor(libroDTO.getIdAutor());
@@ -51,6 +64,9 @@ public class LibroController {
 
     @DeleteMapping("/libros/{id}")
     public ResponseEntity<?> deleteLibro(@PathVariable("id") int id){
+
+        if(!libroService.existsById(id))
+            return new ResponseEntity(new Mensaje("No existe el id registrado"), HttpStatus.NOT_FOUND);
 
         libroService.delete(id);
         return new ResponseEntity(new Mensaje("Libro eliminado"), HttpStatus.OK);

@@ -15,4 +15,8 @@ public interface LibroService {
 
     public void delete(Integer id);
 
+    public boolean existsById(Integer id);
+
+    public boolean existsByNombre(String nombre);
+
 }
