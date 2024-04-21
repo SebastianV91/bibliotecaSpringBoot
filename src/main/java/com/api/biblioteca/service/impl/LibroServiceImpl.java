@@ -30,5 +30,10 @@ public class LibroServiceImpl implements LibroService {
         return libroRepository.findById(id);
     }
 
+    @Override
+    public void delete(Integer id) {
+        libroRepository.deleteById(id);
+    }
+
 
 }

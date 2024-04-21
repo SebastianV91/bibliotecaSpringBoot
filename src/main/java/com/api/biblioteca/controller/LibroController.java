@@ -49,4 +49,11 @@ public class LibroController {
         return new ResponseEntity(new Mensaje("Libro actualizado"), HttpStatus.OK);
     }
 
+    @DeleteMapping("/libros/{id}")
+    public ResponseEntity<?> deleteLibro(@PathVariable("id") int id){
+
+        libroService.delete(id);
+        return new ResponseEntity(new Mensaje("Libro eliminado"), HttpStatus.OK);
+    }
+
 }

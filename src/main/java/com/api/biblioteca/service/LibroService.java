@@ -13,4 +13,6 @@ public interface LibroService {
 
     public Optional<Libro> getOne(Integer id);
 
+    public void delete(Integer id);
+
 }
