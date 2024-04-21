@@ -25,10 +25,16 @@ public class LibroController {
         return new ResponseEntity(new Mensaje("Libro creado"), HttpStatus.OK);
     }
 
-    @GetMapping("/listaLibros")
+    @GetMapping("/listLibros")
     public ResponseEntity<List<Libro>> listLibros(){
         List<Libro> list = libroService.list();
         return new ResponseEntity(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/findLibro/{id}")
+    public ResponseEntity<Libro> getById(@PathVariable("id") Integer id){
+        Libro libro = libroService.getOne(id).get();
+        return new ResponseEntity(libro, HttpStatus.OK);
     }
 
 }

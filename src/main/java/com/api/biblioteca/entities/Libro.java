@@ -23,7 +23,7 @@ public class Libro {
 
     @Column(name = "descripcion")
     private String descripcion;
-    
+
     @Column(name = "fecha_publicacion")
     private Date fechaPublicacion;
 
